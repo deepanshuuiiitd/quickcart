@@ -18,7 +18,7 @@
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [Overview](#-overview)
 - [Features](#-features)
@@ -37,7 +37,7 @@
 
 ---
 
-## 🚀 Overview
+##  Overview
 
 **QuickCart** is a production-grade quick-commerce platform that simulates a real-world online grocery delivery system. It features a customer-facing storefront with product browsing, cart management, wishlist, order tracking, and payment simulation — alongside a full-featured admin dashboard for inventory, user, and order management.
 
@@ -45,9 +45,9 @@ Built as a comprehensive **DBMS course project**, it demonstrates advanced datab
 
 ---
 
-## ✨ Features
+##  Features
 
-### 🛒 Customer Features
+### Customer Features
 | Feature | Description |
 |---------|-------------|
 | **Product Catalog** | Browse products with category filtering, search, and sorting |
@@ -60,7 +60,7 @@ Built as a comprehensive **DBMS course project**, it demonstrates advanced datab
 | **User Profile** | View and manage personal information and order history |
 | **Help & Support** | Submit and track support tickets |
 
-### 🔧 Admin Features
+###  Admin Features
 | Feature | Description |
 |---------|-------------|
 | **Dashboard Analytics** | Revenue, orders, users, and inventory overview with charts |
@@ -72,7 +72,7 @@ Built as a comprehensive **DBMS course project**, it demonstrates advanced datab
 | **Universal Search** | Debounced search across products, users, orders, and more |
 | **Category Management** | Organize products by categories |
 
-### 🔐 Authentication & Security
+###  Authentication & Security
 - Secure password hashing with **bcrypt**
 - Role-based access control (Customer / Admin)
 - Protected API routes
@@ -80,7 +80,7 @@ Built as a comprehensive **DBMS course project**, it demonstrates advanced datab
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -94,7 +94,7 @@ Built as a comprehensive **DBMS course project**, it demonstrates advanced datab
 
 ---
 
-## 🏗 Architecture
+## Architecture
 
 ```
 ┌──────────────────────────────────────────────────────┐
@@ -127,17 +127,27 @@ Built as a comprehensive **DBMS course project**, it demonstrates advanced datab
 
 ---
 
-## 📸 Screenshots
+##  Screenshots
 
-> Add screenshots of your application here. Recommended screenshots:
+
 >
 > | Screen | Description |
 > |--------|-------------|
 > | Login Page | Authentication with role-based redirect |
+> <img width="1097" height="665" alt="image" src="https://github.com/user-attachments/assets/d7c74408-c8ff-40df-8c7d-1a98260c4fa8" />
+
 > | Product Catalog | Grid view with search, filters, and categories |
+> <img width="1425" height="723" alt="image" src="https://github.com/user-attachments/assets/89c8e14a-f0f6-4a4b-9751-fa0a5b5410cb" />
+
 > | Shopping Cart | Cart with quantity controls and price breakdown |
+> <img width="1418" height="726" alt="image" src="https://github.com/user-attachments/assets/b622b43d-45f2-4d4f-8fd7-077d9dd74042" />
+
 > | Admin Dashboard | Analytics overview with charts |
+> <img width="1405" height="713" alt="image" src="https://github.com/user-attachments/assets/130603b2-fa98-4ace-a661-54f43e66b0f7" />
+
 > | Order Tracking | Real-time order status timeline |
+> <img width="1421" height="727" alt="image" src="https://github.com/user-attachments/assets/95da2ea3-7c57-489e-afe0-7775821c4ac2" />
+
 
 <!-- Uncomment and replace with your actual screenshot paths:
 ![Login Page](screenshots/login.png)
@@ -149,7 +159,7 @@ Built as a comprehensive **DBMS course project**, it demonstrates advanced datab
 
 ---
 
-## 🏁 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -195,7 +205,7 @@ DB_NAME=quickcart
 
 ---
 
-## 🗄 Database Setup
+##  Database Setup
 
 ### Option A: Import the Full Database Dump (Recommended)
 
@@ -239,7 +249,7 @@ mysql -u root -p quickcart < database/quickcart_routines.sql
 
 ---
 
-## ▶ Running the Application
+##  Running the Application
 
 ### Start the Backend
 
@@ -292,18 +302,18 @@ The app will open at `http://localhost:5173`
 
 ---
 
-## 🔑 Demo Credentials
+##  Demo Credentials
 
 | Role | Email | Password |
 |------|-------|----------|
 | **Admin** | `admin@quickcart.com` | `admin123` |
 | **Customer** | `rahul@gmail.com` | `123456` |
 
-> ⚠️ **Note:** Passwords are bcrypt-hashed in the database. The above are the plaintext versions for demo login.
+>  **Note:** Passwords are bcrypt-hashed in the database. The above are the plaintext versions for demo login.
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 quickcart/
@@ -392,7 +402,7 @@ quickcart/
 
 ---
 
-## 🧠 Advanced DBMS Features
+##  Advanced DBMS Features
 
 This project demonstrates the following advanced database concepts:
 
@@ -418,7 +428,7 @@ This project demonstrates the following advanced database concepts:
 
 ---
 
-## 🔮 Future Improvements
+##  Future Improvements
 
 - [ ] **JWT Authentication** — Replace localStorage-based auth with JWT tokens
 - [ ] **Image Upload** — Allow admins to upload product images (Cloudinary/S3)
@@ -433,12 +443,12 @@ This project demonstrates the following advanced database concepts:
 
 ---
 
-## 📄 License
+##  License
 
 This project is licensed under the [MIT License](LICENSE).
 
 ---
 
 <p align="center">
-  Built with ❤️ by <strong>Deepanshu Singh</strong>
+  Built with ❤️ by <strong>Deepanshu Singh and Aditya Giri</strong>
 </p>
