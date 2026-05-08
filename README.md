@@ -271,7 +271,7 @@ The app will open at `http://localhost:5173`
 
 ---
 
-## 📡 API Endpoints
+##  API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
