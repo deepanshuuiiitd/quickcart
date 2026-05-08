@@ -1,3 +1,4 @@
+import API_BASE_URL from '../api.js';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -66,7 +67,7 @@ function AdminSearch() {
         setIsLoading(true);
         debounceRef.current = setTimeout(async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/admin/search?q=${encodeURIComponent(query.trim())}`);
+                const res = await axios.get(`${API_BASE_URL}/api/admin/search?q=${encodeURIComponent(query.trim())}`);
                 setResults(res.data);
                 setIsOpen(true);
                 setActiveIndex(-1);

@@ -1,3 +1,4 @@
+import API_BASE_URL from '../api.js';
 import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -23,7 +24,7 @@ function PaymentSuccess() {
         // Fetch order details for the summary
         const fetchOrderDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/orders/order/${orderId}`);
+                const response = await axios.get(`${API_BASE_URL}/api/orders/order/${orderId}`);
                 setOrderDetails(response.data);
             } catch (err) {
                 console.error("Error fetching order details:", err);

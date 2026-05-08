@@ -1,3 +1,4 @@
+import API_BASE_URL from '../api.js';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -22,9 +23,9 @@ function AdminProfile() {
         const fetchStats = async () => {
             try {
                 const [productsRes, usersRes, ordersRes] = await Promise.all([
-                    axios.get('http://localhost:5000/api/products'),
-                    axios.get('http://localhost:5000/api/users'),
-                    axios.get('http://localhost:5000/api/orders/all'),
+                    axios.get('${API_BASE_URL}/api/products'),
+                    axios.get('${API_BASE_URL}/api/users'),
+                    axios.get('${API_BASE_URL}/api/orders/all'),
                 ]);
                 setStats({
                     totalProducts: productsRes.data.length,
@@ -46,7 +47,7 @@ function AdminProfile() {
     const handleUpdateProfile = async (e) => {
         e.preventDefault();
         try {
-            await axios.put('http://localhost:5000/api/auth/update', {
+            await axios.put('${API_BASE_URL}/api/auth/update', {
                 userId: user.user_id,
                 name: formData.name,
                 phone: formData.phone,

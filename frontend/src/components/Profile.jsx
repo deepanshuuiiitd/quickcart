@@ -1,3 +1,4 @@
+import API_BASE_URL from '../api.js';
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
@@ -19,7 +20,7 @@ function Profile() {
 
         setFormData({ name: user.name || '', phone: user.phone || '', address: user.address || '' });
 
-        axios.get(`http://localhost:5000/api/orders/history/${user.user_id}`)
+        axios.get(`${API_BASE_URL}/api/orders/history/${user.user_id}`)
             .then(response => setOrderHistory(response.data))
             .catch(error => console.error("Error fetching order history:", error));
     }, [user, navigate]);
@@ -31,7 +32,7 @@ function Profile() {
     const handleUpdateProfile = async (e) => {
         e.preventDefault();
         try {
-            await axios.put('http://localhost:5000/api/auth/update', {
+            await axios.put('${API_BASE_URL}/api/auth/update', {
                 userId: user.user_id,
                 name: formData.name,
                 phone: formData.phone,

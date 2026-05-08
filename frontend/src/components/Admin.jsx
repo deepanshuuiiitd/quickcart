@@ -1,3 +1,4 @@
+import API_BASE_URL from '../api.js';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -30,7 +31,7 @@ function Admin() {
     const user = JSON.parse(localStorage.getItem('quickcart_user'));
 
     const fetchOrders = () => {
-        let url = 'http://localhost:5000/api/orders/all';
+        let url = '${API_BASE_URL}/api/orders/all';
         if (dateRange.start && dateRange.end) {
             url += `?start=${dateRange.start}&end=${dateRange.end}`;
         }
@@ -38,7 +39,7 @@ function Admin() {
     };
 
     const fetchCategories = () => {
-        axios.get('http://localhost:5000/api/categories')
+        axios.get('${API_BASE_URL}/api/categories')
             .then(res => {
                 setCategories(res.data);
                 // Set default category if none selected
@@ -50,22 +51,22 @@ function Admin() {
     };
 
     const fetchData = () => {
-        axios.get('http://localhost:5000/api/analytics/top-products').then(res => setTopProducts(res.data)).catch(console.error);
-        axios.get('http://localhost:5000/api/notifications').then(res => setNotifications(res.data)).catch(console.error);
+        axios.get('${API_BASE_URL}/api/analytics/top-products').then(res => setTopProducts(res.data)).catch(console.error);
+        axios.get('${API_BASE_URL}/api/notifications').then(res => setNotifications(res.data)).catch(console.error);
         fetchOrders();
-        axios.get('http://localhost:5000/api/products').then(res => setProducts(res.data)).catch(console.error);
-        axios.get('http://localhost:5000/api/users').then(res => setCustomers(res.data)).catch(console.error);
-        axios.get('http://localhost:5000/api/suggestions').then(res => setSuggestions(res.data)).catch(console.error);
-        axios.get('http://localhost:5000/api/analytics/low-stock').then(res => setLowStock(res.data)).catch(console.error);
-        axios.get('http://localhost:5000/api/analytics/category-rollups').then(res => setCategoryRollups(res.data.rollups || [])).catch(console.error);
-        axios.get('http://localhost:5000/api/analytics/ratings').then(res => setRatingAnalytics(res.data)).catch(console.error);
-        axios.get('http://localhost:5000/api/support/admin/all').then(res => setTickets(res.data)).catch(console.error);
+        axios.get('${API_BASE_URL}/api/products').then(res => setProducts(res.data)).catch(console.error);
+        axios.get('${API_BASE_URL}/api/users').then(res => setCustomers(res.data)).catch(console.error);
+        axios.get('${API_BASE_URL}/api/suggestions').then(res => setSuggestions(res.data)).catch(console.error);
+        axios.get('${API_BASE_URL}/api/analytics/low-stock').then(res => setLowStock(res.data)).catch(console.error);
+        axios.get('${API_BASE_URL}/api/analytics/category-rollups').then(res => setCategoryRollups(res.data.rollups || [])).catch(console.error);
+        axios.get('${API_BASE_URL}/api/analytics/ratings').then(res => setRatingAnalytics(res.data)).catch(console.error);
+        axios.get('${API_BASE_URL}/api/support/admin/all').then(res => setTickets(res.data)).catch(console.error);
         fetchCategories();
     };
 
     const handleSuggestionAction = async (id, status) => {
         try {
-            await axios.put(`http://localhost:5000/api/suggestions/${id}`, { status });
+            await axios.put(`${API_BASE_URL}/api/suggestions/${id}`, { status });
             fetchData();
         } catch (err) {
             alert('Failed to update suggestion');
@@ -74,7 +75,7 @@ function Admin() {
 
     const handleDeleteSuggestion = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/api/suggestions/${id}`);
+            await axios.delete(`${API_BASE_URL}/api/suggestions/${id}`);
             fetchData();
         } catch (err) {
             alert('Failed to delete suggestion');
@@ -92,7 +93,7 @@ function Admin() {
     const handleAddProduct = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/products', newProduct);
+            await axios.post('${API_BASE_URL}/api/products', newProduct);
             fetchData();
             setNewProduct({ product_name: '', unit_quantity: '', price: '', quantity_available: '', category_name: categories[0]?.category_name || '' });
             alert("Product added!");
@@ -104,7 +105,7 @@ function Admin() {
     const handleCreateCategory = async () => {
         if (!newCategoryName.trim()) return;
         try {
-            await axios.post('http://localhost:5000/api/categories', { category_name: newCategoryName.trim() });
+            await axios.post('${API_BASE_URL}/api/categories', { category_name: newCategoryName.trim() });
             setNewCategoryName('');
             setShowNewCategoryInput(false);
             fetchCategories();
@@ -124,9 +125,9 @@ function Admin() {
         const { type, id } = deleteModal;
         try {
             if (type === 'product') {
-                await axios.delete(`http://localhost:5000/api/products/${id}`);
+                await axios.delete(`${API_BASE_URL}/api/products/${id}`);
             } else if (type === 'user') {
-                await axios.delete(`http://localhost:5000/api/users/${id}`, {
+                await axios.delete(`${API_BASE_URL}/api/users/${id}`, {
                     headers: { 'x-user-id': user?.user_id }
                 });
             }
@@ -139,7 +140,7 @@ function Admin() {
 
     const handleUpdateProduct = async (id, field, value) => {
         try {
-            await axios.put(`http://localhost:5000/api/products/${id}`, { [field]: value });
+            await axios.put(`${API_BASE_URL}/api/products/${id}`, { [field]: value });
             setProducts(prev => prev.map(p => p.product_id === id ? { ...p, [field]: value } : p));
         } catch (error) {
             console.error(error);
@@ -148,7 +149,7 @@ function Admin() {
 
     const handleUpdateUserRole = async (userId, newRole) => {
         try {
-            await axios.put(`http://localhost:5000/api/users/${userId}/role`, { role: newRole });
+            await axios.put(`${API_BASE_URL}/api/users/${userId}/role`, { role: newRole });
             fetchData();
         } catch (err) {
             alert("Role update failed");
@@ -167,7 +168,7 @@ function Admin() {
 
     const handleSaveSale = async () => {
         try {
-            await axios.put(`http://localhost:5000/api/products/${saleModal.productId}`, {
+            await axios.put(`${API_BASE_URL}/api/products/${saleModal.productId}`, {
                 discount_percentage: parseFloat(saleData.discount_percentage) || 0,
                 sale_start: saleData.sale_start || null,
                 sale_end: saleData.sale_end || null
@@ -181,7 +182,7 @@ function Admin() {
 
     const handleRemoveSale = async () => {
         try {
-            await axios.put(`http://localhost:5000/api/products/${saleModal.productId}`, {
+            await axios.put(`${API_BASE_URL}/api/products/${saleModal.productId}`, {
                 discount_percentage: 0,
                 sale_start: null,
                 sale_end: null
@@ -196,7 +197,7 @@ function Admin() {
 
     const handleUpdateTicket = async (ticketId, reply, status, priority) => {
         try {
-            await axios.put(`http://localhost:5000/api/support/reply/${ticketId}`, {
+            await axios.put(`${API_BASE_URL}/api/support/reply/${ticketId}`, {
                 admin_reply: reply,
                 status: status,
                 priority: priority

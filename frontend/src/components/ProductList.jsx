@@ -1,3 +1,4 @@
+import API_BASE_URL from '../api.js';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -81,19 +82,19 @@ function ProductList() {
     };
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/products')
+        axios.get('${API_BASE_URL}/api/products')
             .then(response => setProducts(response.data))
             .catch(error => console.error("Error fetching products:", error));
 
         // Fetch sale products
-        axios.get('http://localhost:5000/api/products/on-sale')
+        axios.get('${API_BASE_URL}/api/products/on-sale')
             .then(response => setSaleProducts(response.data))
             .catch(error => console.error("Error fetching sale products:", error));
 
         if (activeCartId) fetchCartData();
         if (activeUserId) fetchWishlistData();
 
-        axios.get('http://localhost:5000/api/products/trending')
+        axios.get('${API_BASE_URL}/api/products/trending')
             .then(response => setTrending(response.data))
             .catch(error => console.error("Error fetching trending:", error));
 
@@ -102,13 +103,13 @@ function ProductList() {
     }, [activeUserId, activeCartId]);
 
     const fetchCartData = () => {
-        axios.get(`http://localhost:5000/api/carts/${activeCartId}`)
+        axios.get(`${API_BASE_URL}/api/carts/${activeCartId}`)
             .then(response => setCartItems(response.data))
             .catch(error => console.error("Error fetching cart items:", error));
     };
 
     const fetchWishlistData = () => {
-        axios.get(`http://localhost:5000/api/wishlist/${activeUserId}`)
+        axios.get(`${API_BASE_URL}/api/wishlist/${activeUserId}`)
             .then(response => {
                 const items = Array.isArray(response.data) ? response.data : [];
                 setWishlistItems(items.map(item => item.product_id));
@@ -122,7 +123,7 @@ function ProductList() {
             alert(`Sorry! ${product.product_name} is completely out of stock right now.`);
             return;
         }
-        axios.post('http://localhost:5000/api/carts/add', {
+        axios.post('${API_BASE_URL}/api/carts/add', {
             cart_id: activeCartId,
             product_id: product.product_id,
             quantity: 1
@@ -137,10 +138,10 @@ function ProductList() {
             return;
         }
         if (newQty === 0) {
-            axios.delete(`http://localhost:5000/api/carts/remove/${activeCartId}/${productId}`)
+            axios.delete(`${API_BASE_URL}/api/carts/remove/${activeCartId}/${productId}`)
                 .then(() => fetchCartData());
         } else {
-            axios.put('http://localhost:5000/api/carts/update', {
+            axios.put('${API_BASE_URL}/api/carts/update', {
                 cart_id: activeCartId,
                 product_id: productId,
                 quantity: newQty
@@ -163,7 +164,7 @@ function ProductList() {
         localStorage.setItem('recentlyViewed', JSON.stringify(viewed));
         setRecentlyViewedIds(viewed);
 
-        axios.get(`http://localhost:5000/api/products/${product.product_id}/recommendations`)
+        axios.get(`${API_BASE_URL}/api/products/${product.product_id}/recommendations`)
             .then(res => setRecommendations(res.data))
             .catch(error => console.error("Error fetching recommendations:", error));
     };
@@ -173,14 +174,14 @@ function ProductList() {
         if (!activeUserId) return alert("Log in to submit a rating!");
         if (ratingScore === 0) return alert("Please select a star rating!");
         try {
-            await axios.post('http://localhost:5000/api/ratings', {
+            await axios.post('${API_BASE_URL}/api/ratings', {
                 user_id: activeUserId,
                 product_id: selectedProduct.product_id,
                 rating: ratingScore,
                 review_text: reviewText
             });
             setRatingMsg("Rating submitted successfully!");
-            axios.get('http://localhost:5000/api/products').then(res => setProducts(res.data));
+            axios.get('${API_BASE_URL}/api/products').then(res => setProducts(res.data));
             setTimeout(() => setRatingMsg(''), 3000);
         } catch (error) {
             console.error("Failed to submit rating", error);
@@ -192,11 +193,11 @@ function ProductList() {
         if (!activeUserId) return alert("Please log in first!");
         const isSaved = wishlistItems.includes(productId);
         if (isSaved) {
-            axios.delete(`http://localhost:5000/api/wishlist/remove/${activeUserId}/${productId}`)
+            axios.delete(`${API_BASE_URL}/api/wishlist/remove/${activeUserId}/${productId}`)
                 .then(() => fetchWishlistData())
                 .catch(error => console.error("Failed to remove from wishlist:", error.response?.data || error));
         } else {
-            axios.post('http://localhost:5000/api/wishlist/add', {
+            axios.post('${API_BASE_URL}/api/wishlist/add', {
                 user_id: activeUserId,
                 userId: activeUserId,
                 product_id: productId,
@@ -485,7 +486,7 @@ function ProductList() {
                         <form onSubmit={async (e) => {
                             e.preventDefault();
                             try {
-                                const res = await axios.post('http://localhost:5000/api/suggestions', {
+                                const res = await axios.post('${API_BASE_URL}/api/suggestions', {
                                     user_id: user?.user_id,
                                     ...suggestion
                                 });

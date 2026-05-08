@@ -1,3 +1,4 @@
+import API_BASE_URL from '../api.js';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -124,7 +125,7 @@ function Login() {
 
         try {
             if (isLoginMode) {
-                const response = await axios.post('http://localhost:5000/api/auth/login', {
+                const response = await axios.post('${API_BASE_URL}/api/auth/login', {
                     email: formData.email.trim(),
                     password: formData.password
                 });
@@ -135,7 +136,7 @@ function Login() {
                     window.location.href = '/';
                 }
             } else {
-                await axios.post('http://localhost:5000/api/auth/register', {
+                await axios.post('${API_BASE_URL}/api/auth/register', {
                     name: formData.name.trim(),
                     email: formData.email.trim(),
                     phone: formData.phone.trim(),
@@ -169,7 +170,7 @@ function Login() {
             return;
         }
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/forgot-password', {
+            const res = await axios.post('${API_BASE_URL}/api/auth/forgot-password', {
                 email: formData.email.trim()
             });
             setResetToken(res.data.resetToken);
@@ -190,7 +191,7 @@ function Login() {
             return;
         }
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/reset-password', {
+            const res = await axios.post('${API_BASE_URL}/api/auth/reset-password', {
                 token: resetToken,
                 newPassword
             });

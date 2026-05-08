@@ -1,3 +1,4 @@
+import API_BASE_URL from '../api.js';
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
@@ -34,7 +35,7 @@ function Cart() {
     );
 
     const fetchCartData = () => {
-        axios.get(`http://localhost:5000/api/carts/${activeCartId}`)
+        axios.get(`${API_BASE_URL}/api/carts/${activeCartId}`)
             .then(response => {
                 setCartItems(response.data);
                 // Only count valid items for the total
@@ -72,10 +73,10 @@ function Cart() {
         }
 
         if (newQty === 0) {
-            axios.delete(`http://localhost:5000/api/carts/remove/${activeCartId}/${productId}`)
+            axios.delete(`${API_BASE_URL}/api/carts/remove/${activeCartId}/${productId}`)
                 .then(() => fetchCartData());
         } else {
-            axios.put('http://localhost:5000/api/carts/update', {
+            axios.put('${API_BASE_URL}/api/carts/update', {
                 cart_id: activeCartId,
                 product_id: productId,
                 quantity: newQty
@@ -90,7 +91,7 @@ function Cart() {
     };
 
     const handleRemoveItem = (productId) => {
-        axios.delete(`http://localhost:5000/api/carts/remove/${activeCartId}/${productId}`)
+        axios.delete(`${API_BASE_URL}/api/carts/remove/${activeCartId}/${productId}`)
             .then(() => fetchCartData());
     };
 
@@ -100,7 +101,7 @@ function Cart() {
             handleRemoveItem(productId);
             return;
         }
-        axios.put('http://localhost:5000/api/carts/update', {
+        axios.put('${API_BASE_URL}/api/carts/update', {
             cart_id: activeCartId,
             product_id: productId,
             quantity: availableQty
@@ -109,7 +110,7 @@ function Cart() {
 
     const handleApplyCoupon = () => {
         if (!couponCode) return;
-        axios.get(`http://localhost:5000/api/coupons/${couponCode}?amount=${cartTotal}`)
+        axios.get(`${API_BASE_URL}/api/coupons/${couponCode}?amount=${cartTotal}`)
             .then(res => {
                 setDiscount(res.data.discount_percent);
                 alert(`${res.data.message} (${res.data.discount_percent}% off)`);
@@ -132,7 +133,7 @@ function Cart() {
 
     const handlePaymentComplete = (paymentResult) => {
         setIsPaymentProcessing(false);
-        axios.post('http://localhost:5000/api/orders/checkout', {
+        axios.post('${API_BASE_URL}/api/orders/checkout', {
             userId: user.user_id,
             cartId: activeCartId,
             totalAmount: grandTotal,

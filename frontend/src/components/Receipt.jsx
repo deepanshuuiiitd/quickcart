@@ -1,3 +1,4 @@
+import API_BASE_URL from '../api.js';
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
@@ -7,7 +8,7 @@ function Receipt() {
     const [billItems, setBillItems] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/orders/bill/${orderId}`)
+        axios.get(`${API_BASE_URL}/api/orders/bill/${orderId}`)
             .then(response => {
                 setBillItems(response.data);
             })

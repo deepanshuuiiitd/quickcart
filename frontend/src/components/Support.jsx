@@ -1,3 +1,4 @@
+import API_BASE_URL from '../api.js';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -20,7 +21,7 @@ function Support() {
 
     const fetchUserTickets = async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/api/support/user/${user.user_id}`);
+            const res = await axios.get(`${API_BASE_URL}/api/support/user/${user.user_id}`);
             setTickets(res.data);
         } catch (err) {
             console.error("Failed to fetch tickets", err);
@@ -31,7 +32,7 @@ function Support() {
         e.preventDefault();
         try {
             console.log('Submitting ticket:', { user_id: user.user_id, ...newTicket });
-            const response = await axios.post('http://localhost:5000/api/support/create', {
+            const response = await axios.post('${API_BASE_URL}/api/support/create', {
                 user_id: user.user_id,
                 ...newTicket
             });
