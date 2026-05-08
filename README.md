@@ -140,7 +140,8 @@ Built as a comprehensive **DBMS course project**, it demonstrates advanced datab
 > <img width="1425" height="723" alt="image" src="https://github.com/user-attachments/assets/89c8e14a-f0f6-4a4b-9751-fa0a5b5410cb" />
 
 > | Shopping Cart | Cart with quantity controls and price breakdown |
-> <img width="1418" height="726" alt="image" src="https://github.com/user-attachments/assets/b622b43d-45f2-4d4f-8fd7-077d9dd74042" />
+> <img width="1345" height="683" alt="image" src="https://github.com/user-attachments/assets/121109aa-f7d1-4ad1-b58c-7a5636545813" />
+
 
 > | Admin Dashboard | Analytics overview with charts |
 > <img width="1405" height="713" alt="image" src="https://github.com/user-attachments/assets/130603b2-fa98-4ace-a661-54f43e66b0f7" />
