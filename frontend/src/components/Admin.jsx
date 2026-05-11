@@ -31,7 +31,7 @@ function Admin() {
     const user = JSON.parse(localStorage.getItem('quickcart_user'));
 
     const fetchOrders = () => {
-        let url = '${API_BASE_URL}/api/orders/all';
+        let url = `${API_BASE_URL}/api/orders/all`;
         if (dateRange.start && dateRange.end) {
             url += `?start=${dateRange.start}&end=${dateRange.end}`;
         }
@@ -39,7 +39,7 @@ function Admin() {
     };
 
     const fetchCategories = () => {
-        axios.get('${API_BASE_URL}/api/categories')
+        axios.get(`${API_BASE_URL}/api/categories`)
             .then(res => {
                 setCategories(res.data);
                 // Set default category if none selected
@@ -51,16 +51,16 @@ function Admin() {
     };
 
     const fetchData = () => {
-        axios.get('${API_BASE_URL}/api/analytics/top-products').then(res => setTopProducts(res.data)).catch(console.error);
-        axios.get('${API_BASE_URL}/api/notifications').then(res => setNotifications(res.data)).catch(console.error);
+        axios.get(`${API_BASE_URL}/api/analytics/top-products`).then(res => setTopProducts(res.data)).catch(console.error);
+        axios.get(`${API_BASE_URL}/api/notifications`).then(res => setNotifications(res.data)).catch(console.error);
         fetchOrders();
-        axios.get('${API_BASE_URL}/api/products').then(res => setProducts(res.data)).catch(console.error);
-        axios.get('${API_BASE_URL}/api/users').then(res => setCustomers(res.data)).catch(console.error);
-        axios.get('${API_BASE_URL}/api/suggestions').then(res => setSuggestions(res.data)).catch(console.error);
-        axios.get('${API_BASE_URL}/api/analytics/low-stock').then(res => setLowStock(res.data)).catch(console.error);
-        axios.get('${API_BASE_URL}/api/analytics/category-rollups').then(res => setCategoryRollups(res.data.rollups || [])).catch(console.error);
-        axios.get('${API_BASE_URL}/api/analytics/ratings').then(res => setRatingAnalytics(res.data)).catch(console.error);
-        axios.get('${API_BASE_URL}/api/support/admin/all').then(res => setTickets(res.data)).catch(console.error);
+        axios.get(`${API_BASE_URL}/api/products`).then(res => setProducts(res.data)).catch(console.error);
+        axios.get(`${API_BASE_URL}/api/users`).then(res => setCustomers(res.data)).catch(console.error);
+        axios.get(`${API_BASE_URL}/api/suggestions`).then(res => setSuggestions(res.data)).catch(console.error);
+        axios.get(`${API_BASE_URL}/api/analytics/low-stock`).then(res => setLowStock(res.data)).catch(console.error);
+        axios.get(`${API_BASE_URL}/api/analytics/category-rollups`).then(res => setCategoryRollups(res.data.rollups || [])).catch(console.error);
+        axios.get(`${API_BASE_URL}/api/analytics/ratings`).then(res => setRatingAnalytics(res.data)).catch(console.error);
+        axios.get(`${API_BASE_URL}/api/support/admin/all`).then(res => setTickets(res.data)).catch(console.error);
         fetchCategories();
     };
 
@@ -93,7 +93,7 @@ function Admin() {
     const handleAddProduct = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('${API_BASE_URL}/api/products', newProduct);
+            await axios.post(`${API_BASE_URL}/api/products`, newProduct);
             fetchData();
             setNewProduct({ product_name: '', unit_quantity: '', price: '', quantity_available: '', category_name: categories[0]?.category_name || '' });
             alert("Product added!");
@@ -105,7 +105,7 @@ function Admin() {
     const handleCreateCategory = async () => {
         if (!newCategoryName.trim()) return;
         try {
-            await axios.post('${API_BASE_URL}/api/categories', { category_name: newCategoryName.trim() });
+            await axios.post(`${API_BASE_URL}/api/categories`, { category_name: newCategoryName.trim() });
             setNewCategoryName('');
             setShowNewCategoryInput(false);
             fetchCategories();

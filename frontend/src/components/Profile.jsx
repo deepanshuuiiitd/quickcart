@@ -32,7 +32,7 @@ function Profile() {
     const handleUpdateProfile = async (e) => {
         e.preventDefault();
         try {
-            await axios.put('${API_BASE_URL}/api/auth/update', {
+            await axios.put(`${API_BASE_URL}/api/auth/update`, {
                 userId: user.user_id,
                 name: formData.name,
                 phone: formData.phone,

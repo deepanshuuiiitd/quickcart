@@ -32,7 +32,7 @@ function Support() {
         e.preventDefault();
         try {
             console.log('Submitting ticket:', { user_id: user.user_id, ...newTicket });
-            const response = await axios.post('${API_BASE_URL}/api/support/create', {
+            const response = await axios.post(`${API_BASE_URL}/api/support/create`, {
                 user_id: user.user_id,
                 ...newTicket
             });

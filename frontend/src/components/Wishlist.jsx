@@ -15,7 +15,7 @@ function Wishlist() {
             // then match them together so we guarantee we have the names and prices!
             Promise.all([
                 axios.get(`${API_BASE_URL}/api/wishlist/${activeUserId}`),
-                axios.get('${API_BASE_URL}/api/products')
+                axios.get(`${API_BASE_URL}/api/products`)
             ])
                 .then(([wishlistRes, productsRes]) => {
                     const userWishlist = wishlistRes.data;
@@ -50,7 +50,7 @@ function Wishlist() {
             return;
         }
 
-        axios.post('${API_BASE_URL}/api/carts/add', {
+        axios.post(`${API_BASE_URL}/api/carts/add`, {
             cart_id: activeUserId, // Same as activeCartId
             product_id: product.product_id,
             quantity: 1

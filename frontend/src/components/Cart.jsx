@@ -76,7 +76,7 @@ function Cart() {
             axios.delete(`${API_BASE_URL}/api/carts/remove/${activeCartId}/${productId}`)
                 .then(() => fetchCartData());
         } else {
-            axios.put('${API_BASE_URL}/api/carts/update', {
+            axios.put(`${API_BASE_URL}/api/carts/update`, {
                 cart_id: activeCartId,
                 product_id: productId,
                 quantity: newQty
@@ -101,7 +101,7 @@ function Cart() {
             handleRemoveItem(productId);
             return;
         }
-        axios.put('${API_BASE_URL}/api/carts/update', {
+        axios.put(`${API_BASE_URL}/api/carts/update`, {
             cart_id: activeCartId,
             product_id: productId,
             quantity: availableQty
@@ -133,7 +133,7 @@ function Cart() {
 
     const handlePaymentComplete = (paymentResult) => {
         setIsPaymentProcessing(false);
-        axios.post('${API_BASE_URL}/api/orders/checkout', {
+        axios.post(`${API_BASE_URL}/api/orders/checkout`, {
             userId: user.user_id,
             cartId: activeCartId,
             totalAmount: grandTotal,
